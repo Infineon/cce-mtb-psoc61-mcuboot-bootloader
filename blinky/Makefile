@@ -61,7 +61,7 @@ ifneq ($(FLASH_MAP), )
 PLATFORM=PSOC_061_512K
 generate_flashmap_cm4:
 	@echo -e "\n==============================================================================================================================================================="
-	@echo -e "= Generating flashmap.mk using $(FLASH_MAP) file (Look out for any warnings or errors in this step) ="
+	@echo -e "= Generating flashmap.mk ="
 	@echo -e "==============================================================================================================================================================="
 	$(PYTHON_PATH) ../bootloader/scripts/flashmap.py -p $(PLATFORM) -i ../bootloader/flashmap/$(FLASH_MAP) -o ./source/cy_flash_map.h -d 1 > ./flashmap.mk
 	@echo -e "===============================================================================================================================================================\n"

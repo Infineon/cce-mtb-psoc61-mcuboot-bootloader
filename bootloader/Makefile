@@ -59,7 +59,7 @@ PLATFORM=PSOC_061_512K
 ifneq ($(FLASH_MAP), )
 generate_flashmap_cm4:
 	@echo -e "\n============================================================="
-	@echo -e "= Generating cy_flash_map.h and flashmap.mk using $(FLASH_MAP) file (Look out for any warnings or errors in this step) ="
+	@echo -e "= Generating cy_flash_map.h and flashmap.mk ="
 	@echo -e "============================================================="
 	$(PYTHON_PATH) ./scripts/flashmap.py -p $(PLATFORM) -i ./flashmap/$(FLASH_MAP) -o ./source/cy_flash_map.h > ./flashmap.mk
 	echo -e "**** PLATFORM = $(PLATFORM) FLASH_MAP = $(FLASH_MAP) DEVICE_COMPONENTS = $(DEVICE_COMPONENTS)***** "
