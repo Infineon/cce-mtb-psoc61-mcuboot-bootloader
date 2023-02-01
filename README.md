@@ -135,7 +135,7 @@ Open the BSP Assistant Tool, and open the BSP that you have created during proje
 
     ![](images/open_bsp_assistant.png)
 
-2. Change the device to [CY8C6136BZI-F34](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/cy8c6136bzi-f34/) and **Apply** changes. 
+2. Change the device to [CY8C6136BZI-F34](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/cy8c6136bzi-f34/) and **Apply** changes and close the BSP Assistant. 
    
    **Note:** [CY8C6136BZI-F34](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/cy8c6136bzi-f34/) is PSoC61 device. 
 
@@ -143,11 +143,11 @@ Open the BSP Assistant Tool, and open the BSP that you have created during proje
 
     ![](images/select-dev.png)
     
-3. Scroll down to *Dependancies* and select retarget-io.
+3. Scroll up to Tools and open *Library Manager 2.0* and Click on **Update**, After Update Close the Library Manager.
 
-    **Figure 3. Select retarget-io**
+    **Figure 3. Update the Project**
 
-    ![](images/select-retarget-io.png)
+    ![](images/project-update.png)
 
 4. Scroll up to Configurator and open *Device Configurator*. Save the configurations by clicking on **File** > **Save**. 
 
