@@ -2,7 +2,7 @@
 
 *Disclaimer: This is a community code example (CCE) released for the benefit of the community users. These projects have only been tested for the listed BSPs, tools versions, and toolchains documented in this readme. They are intended to demonstrate how a solution / concept / use-case can be achieved on a particular device. For official code examples, please click [here](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software)*
 
-This community code example (CCE) demonstrates the implementation of [MCUBoot](https://www.mcuboot.com/) based bootloader for [PSoC&trade; 61 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/psoc-61/) devices. This CCE is derived from [mtb-example-psoc6-mcuboot-basic](https://github.com/Infineon/mtb-example-psoc6-mcuboot-basic) and PSoC61 support to run both Application and Bootloader from CM4 CPU is added. 
+This community code example (CCE) demonstrates the implementation of [MCUBoot](https://www.mcuboot.com/) based bootloader for [PSoC&trade; 61 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/psoc-61/) devices. This CCE is derived from [mtb-example-psoc6-mcuboot-basic](https://github.com/Infineon/mtb-example-psoc6-mcuboot-basic) and PSoC61 support to run both Application and Bootloader from CM4 CPU is added.
 
 In order to test this sample you need target board with PSoC61. You can replace the PSoC6 IC on one of the [PSoC™ 6 development kits](https://documentation.infineon.com/html/psoc6/hsg1651214227031.html) with [PSoC&trade; 61 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/psoc-61/) IC.
 
@@ -20,13 +20,13 @@ In order to test this sample you need target board with PSoC61. You can replace 
 
 ## Supported Kit
 
-- This code example uses a customized **PSOC 62** KIT with [PSoC&trade; 61 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/psoc-61/) IC mounted on it. 
+- This code example uses a customized **PSOC 62** KIT with [PSoC&trade; 61 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/psoc-61/) IC mounted on it.
 
 - Any one of the [PSoC™ 6 development kits](https://documentation.infineon.com/html/psoc6/hsg1651214227031.html) can be used by replacing the IC on the board with [PSoC&trade; 61 MCU](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/psoc-61/) IC.
   This document uses [PSoC&trade; 62S2 Wi-Fi Bluetooth&reg; pioneer kit](https://www.infineon.com/cms/en/product/evaluation-boards/cy8ckit-062s2-43012) (`CY8CKIT-062S2-43012`) with *PSOC 61* [CY8C6136BZI-F34](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/cy8c6136bzi-f34/) custom mounted on it as a reference for all the discussions
 
- **Note:** Though this code example talks about customizing the `CY8CKIT-062S2-43012`, any other PSoC62 KIT can be used. Or user may decide to build his own KIT with PSoC61 and test this code example. Care must be taken to configure the BSP correctly in such cases. Please refer [BSP Assistant User Guide](https://www.infineon.com/dgdl/Infineon-ModusToolbox_BSP_Assistant_1.0_User_Guide-UserManual-v02_00-EN.pdf?fileId=8ac78c8c8386267f0183a972f45c59af) to create your own BSP. 
- 
+ **Note:** Though this code example talks about customizing the `CY8CKIT-062S2-43012`, any other PSoC62 KIT can be used. Or user may decide to build his own KIT with PSoC61 and test this code example. Care must be taken to configure the BSP correctly in such cases. Please refer [BSP Assistant User Guide](https://www.infineon.com/dgdl/Infineon-ModusToolbox_BSP_Assistant_1.0_User_Guide-UserManual-v02_00-EN.pdf?fileId=8ac78c8c8386267f0183a972f45c59af) to create your own BSP.
+
  Before using this code example, make sure that the board is upgraded to KitProg3. The tool and instructions are available in the [Firmware Loader](https://github.com/Infineon/Firmware-loader) GitHub repository. If you do not upgrade, you will see an error like "unable to find CMSIS-DAP device" or "KitProg firmware is out of date".
 
 
@@ -52,7 +52,7 @@ Create the project and open it using one of the following:
    You can also just start the application creation process again and select a different kit.
 
    If you want to use the application for a kit not listed here, you may need to update the source files. If the kit does not have the required resources, the application may not work.
-   
+
    **Note:** In this step, please create the application picking a any known Kit like `CY8CKIT-062S2-43012` This is because, there are no offcial PSoC&trade; 61 Kit and hence the BSP. You will have build your own BSP; which will be discussed in next steps.
 
 3. In the **Project Creator - Select Application** dialog, choose the example by enabling the checkbox.
@@ -129,37 +129,36 @@ Following section describes how to customize the BSP for PSoC61 in the context o
 
 1. Right-click on the project name in ModusToolbox Project Explorer Window and open *BSP Assistant* by clicking on **ModuToolbox** > **BSP Assistant 1.0**)
 Open the BSP Assistant Tool, and open the BSP that you have created during project creation.
-**Note:** When UI version of the BSP assistant is used from the ModusToolbox UI, active BSP will be automatically picked by the BSP Assistant. 
+**Note:** When UI version of the BSP assistant is used from the ModusToolbox UI, active BSP will be automatically picked by the BSP Assistant.
 
     **Figure 1. Open BSP Assistant 1.0**
 
     ![](images/open_bsp_assistant.png)
 
-2. Change the device to [CY8C6136BZI-F34](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/cy8c6136bzi-f34/) and **Apply** changes and close the BSP Assistant. 
-   
-   **Note:** [CY8C6136BZI-F34](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/cy8c6136bzi-f34/) is PSoC61 device. 
+2. Change the device to [CY8C6136BZI-F34](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/cy8c6136bzi-f34/) and **Apply** changes and close the BSP Assistant.
+
+   **Note:** [CY8C6136BZI-F34](https://www.infineon.com/cms/en/product/microcontroller/32-bit-psoc-arm-cortex-microcontroller/psoc-6-32-bit-arm-cortex-m4-mcu/cy8c6136bzi-f34/) is PSoC61 device.
 
     **Figure 2. Change the device to PSoC61**
 
     ![](images/select-dev.png)
-    
-3. Scroll up to Tools and open *Library Manager 2.0* and Click on **Update**, After Update Close the Library Manager.
 
-    **Figure 3. Update the Project**
+3. Scroll up to Configurators and open *Device Configurator*. Save the configurations by clicking on **File** > **Save**.
 
-    ![](images/project-update.png)
+    This step may generate some error or warning. Close the dialogue box by clicking *OK*.
 
-4. Scroll up to Configurator and open *Device Configurator*. Save the configurations by clicking on **File** > **Save**. 
+    Check the *Notice List*, Two errors will be listed as shown in below figure.
 
-    This step may generate some error or warning. Close the dialogue box by clicking *OK*. Click on *Fix* visible in Notice list to automatically resolve the issues.
+    Fix the error corresponding to `Error: 'srss[0].clock[0].pathmux[5]' does not exist on the device`, by ***left click* on *fix and Disable the clock***.
 
-    Please check the *Notice List*, *left click* on *fix and Disable the clock*, if there any errors/warnings. It will be fixed automatically.
-
-    **Figure 4. Fix Warnings or Errors while saving Device Configurations**
+    Igonre the other errors/warnings regarding `Error: There may be an inconsistency between the *.modus file and the makefile target configuration device sets.` It will be **fixed automatically on next step**.
 
     ![](images/devicecfg-save.png)
 
-5. Save the configurations again by using **File** > **Save** option and close *Device Configurator* and *BSP Assistant*.
+4. Open the terminal, go to < application > and execute the `make eclipse` command to Generates launch configs and project files.
+   ```
+   make eclipse
+   ```
 
 **Note:** You can use CLI version of the BSP Assistant Tool for the above configurations. Please refer [BSP Assistant User Guide](https://www.infineon.com/dgdl/Infineon-ModusToolbox_BSP_Assistant_1.0_User_Guide-UserManual-v02_00-EN.pdf?fileId=8ac78c8c8386267f0183a972f45c59af)
 
@@ -200,16 +199,9 @@ This example bundles two applications - the bootloader and the blinky app run by
       ```
 4. Build and program the bootloader application.
 
-   <details open><summary><b>Using Eclipse IDE for ModusToolbox&trade; software</b></summary>
+   <summary><b>Using CLI</b></summary>
 
-      1. Select the 'bootloader' application in the Project Explorer.
-
-      2. In the **Quick Panel**, scroll down, and click **\<Application Name> Program (KitProg3_MiniProg4)**.
-   </details>
-
-   <details open><summary><b>Using CLI</b></summary>
-
-     From the terminal, navigate to _< application >/bootloader execute the `make program_proj` command to build and program the application using the default toolchain to the default target. The default toolchain and target are specified in the application's Makefile but you can override those values manually:
+     From the terminal, navigate to _< application >/bootloader and execute the `make program_proj` command to build and program the application using the default toolchain to the default target. The default toolchain and target are specified in the application's Makefile but you can override those values manually:
 
       ```
       make program_proj TOOLCHAIN=<toolchain>
@@ -219,7 +211,6 @@ This example bundles two applications - the bootloader and the blinky app run by
       ```
       make program_proj TOOLCHAIN=GCC_ARM
       ```
-   </details>
 
 5. After programming, the bootloader starts automatically. Confirm that the UART terminal displays a message as shown follows:
 
@@ -229,14 +220,7 @@ This example bundles two applications - the bootloader and the blinky app run by
 
 6. Build and program the blinky application in the BOOT mode.
 
-   <details open><summary><b>Using Eclipse IDE for ModusToolbox&trade; software</b></summary>
-
-      1. Select the 'blinky' application in the project explorer.
-
-      2. In the **Quick Panel**, scroll down, and click **\<Application name> Program (KitProg3_MiniProg4)**.
-      </details>
-
-   <details open><summary><b>Using CLI</b></summary>
+   <summary><b>Using CLI</b></summary>
 
       From the terminal, navigate to _< application >/blinky_ directory and execute the `make program_proj` command to build and program the application using the default toolchain to the default target.
 
@@ -248,8 +232,6 @@ This example bundles two applications - the bootloader and the blinky app run by
       ```
       make program_proj TOOLCHAIN=GCC_ARM
       ```
-
-   </details>
 
 7. After programming, the bootloader starts automatically and lets CM4 run the blinky app. Confirm that the user LED toggles at a 1-second interval and the UART terminal displays a message as follows:
 
@@ -290,7 +272,7 @@ This example bundles two applications - the bootloader and the blinky app run by
       </details>
 
       <details open><summary><b>Using Cypress&trade; Programmer</b></summary>
-      
+
       1. Launch **Cypress Programmer** and select the probe or kit that you are using.
 
       2. Click on the **Open** icon and select the UPGRADE image hex file from *blinky/build/UPGRADE/\< BSP-NAME >/\<Build Config>* directory.
@@ -337,7 +319,7 @@ In a real scenario, an application that can download the upgrade image over a wi
 
 The MCUboot repo in [GitHub](https://github.com/mcu-tools/mcuboot/tree/v1.8.3-cypress/boot/cypress) also includes two apps - MCUbootApp and BlinkyApp - for PSoC&trade; 62 MCU devices. The functionality of this code example is the same as those apps. In this example, the bootloader app reuses a lot of source files (see *bootloader/app.mk* for the exact list of files) from MCUbootApp.
 
-This code example uses ModusToolbox&trade; software resources such as BSPs and PSoC&trade; 6 MCU to provide a rich development experience that aligns well with other code examples based on ModusToolbox&trade; software. 
+This code example uses ModusToolbox&trade; software resources such as BSPs and PSoC&trade; 6 MCU to provide a rich development experience that aligns well with other code examples based on ModusToolbox&trade; software.
 
 Design and implementations are similar to that of [mtb-example-psoc6-mcuboot-basic] (https://github.com/Infineon/mtb-example-psoc6-mcuboot-basic) example; execpt both Bootloader and Applications are designed to run from CM4 CPU and tested on only PSoC61 device.
 
@@ -359,7 +341,7 @@ See [MCUboot design](https://github.com/mcu-tools/mcuboot/blob/v1.8.1-cypress/do
  :------- | :------------    | :------------
  UART (HAL)    |cy_retarget_io_uart_obj| UART HAL object used by Retarget-IO for Debug UART port
  UART (HAL)    |uart_modem_obj| UART HAL object used for communicating with LTE Modem
- GPIO (HAL)    | UART_MODEM_RESET       | User GPIO used to reset LTE Modem 
+ GPIO (HAL)    | UART_MODEM_RESET       | User GPIO used to reset LTE Modem
  GPIO (HAL)    | CYBSP_USER_LED         | User LED controlled by the subscriber based on incoming MQTT messages
  GPIO (HAL)    | CYBSP_USER_BTN         | User button used to notify the publisher to publish MQTT messages
 
@@ -389,14 +371,14 @@ This section explains the important make variables that affect the MCUboot funct
 
 These variables are common to both the bootloader and blinky apps and are configured via the *bootloader/shared_config.mk* file.
 
- Variable | Default value | Description  
- -------- | ------------- |------------  
+ Variable | Default value | Description
+ -------- | ------------- |------------
  `SIGN_KEY_FILE`             | cypress-test-ec-p256 | Name of the private and public key files (the same name is used for both keys) |
- `BOOTLOADER_SIZE`           | Autogenerated       | Flash size of the bootloader app run by CM0+. <br>In the linker script for the bootloader app (CM0+), the `LENGTH` of the `flash` region is set to this value.<br>In the linker script for the blinky app (CM4), the `ORIGIN` of the `flash` region is offset to this value. 
+ `BOOTLOADER_SIZE`           | Autogenerated       | Flash size of the bootloader app run by CM0+. <br>In the linker script for the bootloader app (CM0+), the `LENGTH` of the `flash` region is set to this value.<br>In the linker script for the blinky app (CM4), the `ORIGIN` of the `flash` region is offset to this value.
  `BOOTLOADER_APP_RAM_SIZE`   | 0x20000              | RAM size of the bootloader app run by CM0+. <br/>In the linker script for the bootloader app (CM0+), `LENGTH` of the `ram` region is set to this value.<br/>In the linker script for the blinky app (CM4), the `ORIGIN` of the `ram` region is offset to this value, and the `LENGTH` of the `ram` region is calculated based on this value.
- `SLOT_SIZE`                 | Autogenerated       | Size of the primary slot and secondary slot. i.e., flash size of the blinky app run by CM4. 
+ `SLOT_SIZE`                 | Autogenerated       | Size of the primary slot and secondary slot. i.e., flash size of the blinky app run by CM4.
  `MCUBOOT_HEADER_SIZE`       | 0x400                | Size of the MCUboot header. Must be a multiple of 1024 (see the following note).<br>Used in the following places:<br>1. In the linker script for the blinky app (CM4), the starting address of the`.text` section is offset by the MCUboot header size from the `ORIGIN` of the `flash` region. This is to leave space for the header that will be later inserted by the *imgtool* during post-build steps. <br/>2. Passed to the *imgtool* while signing the image. The *imgtool* fills the space of this size with zeroes (or 0xFF depending on internal or external flash) and then adds the actual header from the beginning of the image.
- `MAX_IMG_SECTORS`           | Autogenerated       | Maximum number of flash sectors (or rows) per image slot for which swap status is tracked in the image trailer.  
+ `MAX_IMG_SECTORS`           | Autogenerated       | Maximum number of flash sectors (or rows) per image slot for which swap status is tracked in the image trailer.
  `MCUBOOT_IMAGE_NUMBER`      | Autogenerated       | The number of images supported in the case of multi-image bootloading.
  `PRIMARY_IMG_START`         | Autogenerated       | Starting address of primary slot.
  `SECONDARY_IMG_START`        | Autogenerated       | Starting address of secondary slot.
@@ -415,7 +397,7 @@ PSoC&trade; 6 MCU supports up to 240 external interrupts in addition to the 16 s
 
 These variables are configured via *bootloader/Makefile*.
 
- Variable             | Default value | Description  
+ Variable             | Default value | Description
  -------------------- | ------------- | ----------------
  `USE_OVERWRITE`              | Autogenerated       | Value is 1 when scratch and status partitions are not defined in the flashmap JSON file.
  `USE_EXTERNAL_FLASH`         | Autogenerated       | Value is 1 when external flash is used for either primary or secondary slot.
@@ -427,14 +409,14 @@ These variables are configured via *bootloader/Makefile*.
 
 These variables are configured via *blinky/Makefile*.
 
- Variable       | Default value    | Description 
+ Variable       | Default value    | Description
  -------------- | -----------------| -------------
  `IMG_TYPE`        | BOOT   | Valid values: BOOT, UPGRADE<br>**BOOT:** Use when the image is built for the primary slot. The `--pad` argument is not passed to the *imgtool*. <br/>**UPGRADE:** Use when the image is built for the secondary slot.  The `--pad` argument is passed to the *imgtool*.<br>Also, the blinky app defines the LED toggle delay differently depending on whether the image is BOOT type or UPGRADE type.
  `HEADER_OFFSET`   | Auto-calculated | The starting address of the CM4 app or the offset at which the header of an image will begin. Value equal to (`SECONDARY_IMG_START` - `PRIMARY_IMG_START`).
  `USE_OVERWRITE`              | Autogenerated       | Value is 1 when scratch and status partitions are not defined in the flashmap JSON file.
  `USE_EXTERNAL_FLASH`         | Autogenerated       | Value is 1 when an external flash is used for either primary or secondary slot.
  `USE_XIP`                    | Autogenerated       | Value is 1 when the primary image is placed on external memory.
- `KEY_FILE_PATH` | *../bootloader/keys* | Path to the private key file. Used with the *imgtool* for signing the image. 
+ `KEY_FILE_PATH` | *../bootloader/keys* | Path to the private key file. Used with the *imgtool* for signing the image.
  `APP_VERSION_MAJOR`<br>`APP_VERSION_MINOR`<br>`APP_VERSION_BUILD` | 1.0.0 if `IMG_TYPE=BOOT`<br>2.0.0 if `IMG_TYPE=UPGRADE` | Passed to the *imgtool* with the `-v` option in *MAJOR.MINOR.BUILD* format, while signing the image. Also available as macros to the application with the same names.
 
 <br />
@@ -458,7 +440,7 @@ arm-none-eabi-objcopy --change-addresses=HEADER_OFFSET -O ihex <input.elf> <outp
 
 The programmer tool for PSoC&trade; 6 MCU (based on OpenOCD) programs the external flash with the data from the HEX file when the address of the data is 0x18000000 or higher. The programmer tool requires the configuration information (e.g., erase/read/program commands) about the external flash present on the board to be able to program the flash. This configuration is placed into the user area of the internal flash, and the address pointing to the configuration is placed into the TOC2 section of the supervisory flash (SFlash) area of the internal flash. The programmer tool understands the TOC2 structure and knows where to look for the address that points to the external flash configuration. See [PSoC&trade; 6 MCU programming specifications](https://www.infineon.com/dgdl/Infineon-PSoC_6_Programming_Specifications-Programming+Specifications-v12_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0f66d9bf5627&utm_source=cypress&utm_medium=referral&utm_campaign=202110_globe_en_all_integration-programming_specification) for more information on SFlash and TOC2.
 
-The *mtb_shared/mcuboot/\<tag>/boot/cypress/MCUBootApp/cy_serial_flash_prog.c* file defines the TOC2 structure and the *cycfg_qspi_memslot.c./h* files under *bsps/TARGET_< BSP-NAME >/config/GeneratedSource* hold the external flash configuration structures. These files are autogenerated from *design.cyqspi* under *bsps/TARGET_< BSP-NAME >/config* using the [QSPI configurator](https://www.cypress.com/ModusToolboxQSPIConfig) tool. 
+The *mtb_shared/mcuboot/\<tag>/boot/cypress/MCUBootApp/cy_serial_flash_prog.c* file defines the TOC2 structure and the *cycfg_qspi_memslot.c./h* files under *bsps/TARGET_< BSP-NAME >/config/GeneratedSource* hold the external flash configuration structures. These files are autogenerated from *design.cyqspi* under *bsps/TARGET_< BSP-NAME >/config* using the [QSPI configurator](https://www.cypress.com/ModusToolboxQSPIConfig) tool.
 
 **Note:** Initially the customized configuration files like - *design.cyqspi, design.cycapsense, design.modus* are present in the folder *templates/TARGET_< BSP-NAME >/config* and are copied automatically from this folder to *bsps/TARGET_< BSP-NAME >/config* during the library updates. The build system reads all these configurations from the *bsps/TARGET_< BSP-NAME >/config*.
 
@@ -471,7 +453,7 @@ The *mtb_shared/mcuboot/\<tag>/boot/cypress/MCUBootApp/cy_serial_flash_prog.c* f
 
 MCUboot checks the image integrity with SHA256, and image authenticity with digital signature verification. Multiple signature algorithms are supported; this example enables ECDSA SECP256R1 (EC256) by default. MCUboot uses the `Mbed TLS` library for cryptography.
 
-PSoC&trade; 6 MCU supports hardware-accelerated cryptography based on the `Mbed TLS` library via a shim layer. The  [cy-mbedtls-acceleration](https://github.com/Infineon/cy-mbedtls-acceleration) library implements this layer. Hardware-accelerated cryptography shortens the boot time by more than four times compared to the software implementation (observation results). 
+PSoC&trade; 6 MCU supports hardware-accelerated cryptography based on the `Mbed TLS` library via a shim layer. The  [cy-mbedtls-acceleration](https://github.com/Infineon/cy-mbedtls-acceleration) library implements this layer. Hardware-accelerated cryptography shortens the boot time by more than four times compared to the software implementation (observation results).
 
 **Note:** In the current version of the MCUBoot library (v1.8.1-cypress), hardware crypto acceleration is not supported.
 
@@ -564,7 +546,7 @@ Initially the customized configuration files like - *design.cyqspi, design.cycap
  Resource  |  Alias/object     |    Purpose
  :-------- | :-------------    | :------------
  UART (HAL)|cy_retarget_io_uart_obj| UART HAL object used by retarget-IO for debug UART port
- GPIO (HAL)    | CYBSP_USER_LED         | User LED 
+ GPIO (HAL)    | CYBSP_USER_LED         | User LED
 
 <br />
 
@@ -573,11 +555,11 @@ Initially the customized configuration files like - *design.cyqspi, design.cycap
 
 Resources  | Links
 -----------|----------------------------------
-Application notes  | [AN228571](https://www.infineon.com/dgdl/Infineon-AN228571_Getting_started_with_PSoC_6_MCU_on_ModusToolbox_software-ApplicationNotes-v06_00-EN.pdf?fileId=8ac78c8c7cdc391c017d0d36de1f66d1&utm_source=cypress&utm_medium=referral&utm_campaign=202110_globe_en_all_integration-an_vanitylink) – Getting started with PSoC&trade; 6 MCU on ModusToolbox&trade; software <br />  [AN215656](https://www.infineon.com/dgdl/Infineon-AN215656_PSoC_6_MCU_Dual-CPU_System_Design-ApplicationNotes-v09_00-EN.pdf?fileId=8ac78c8c7cdc391c017d0d3180c4655f&utm_source=cypress&utm_medium=referral&utm_campaign=202110_globe_en_all_integration-an_vanitylink) – PSoC&trade; 6 MCU: Dual-CPU system design <br /> 
+Application notes  | [AN228571](https://www.infineon.com/dgdl/Infineon-AN228571_Getting_started_with_PSoC_6_MCU_on_ModusToolbox_software-ApplicationNotes-v06_00-EN.pdf?fileId=8ac78c8c7cdc391c017d0d36de1f66d1&utm_source=cypress&utm_medium=referral&utm_campaign=202110_globe_en_all_integration-an_vanitylink) – Getting started with PSoC&trade; 6 MCU on ModusToolbox&trade; software <br />  [AN215656](https://www.infineon.com/dgdl/Infineon-AN215656_PSoC_6_MCU_Dual-CPU_System_Design-ApplicationNotes-v09_00-EN.pdf?fileId=8ac78c8c7cdc391c017d0d3180c4655f&utm_source=cypress&utm_medium=referral&utm_campaign=202110_globe_en_all_integration-an_vanitylink) – PSoC&trade; 6 MCU: Dual-CPU system design <br />
 Code examples  | [Using ModusToolbox&trade; software](https://github.com/Infineon/Code-Examples-for-ModusToolbox-Software) on GitHub <br /> [Using PSoC&trade; Creator](https://www.infineon.com/cms/en/design-support/software/code-examples/psoc-3-4-5-code-examples-for-psoc-creator)
-Device documentation | [PSoC&trade; 6 MCU datasheets](https://www.infineon.com/cms/en/search.html#!view=downloads&term=psoc6&doc_group=Data%20Sheet) <br /> [PSoC&trade; 6 technical reference manuals](https://www.infineon.com/cms/en/search.html#!view=downloads&term=psoc6&doc_group=Additional%20Technical%20Information)<br /> 
+Device documentation | [PSoC&trade; 6 MCU datasheets](https://www.infineon.com/cms/en/search.html#!view=downloads&term=psoc6&doc_group=Data%20Sheet) <br /> [PSoC&trade; 6 technical reference manuals](https://www.infineon.com/cms/en/search.html#!view=downloads&term=psoc6&doc_group=Additional%20Technical%20Information)<br />
 Development kits | Select your kits from the [Evaluation board finder](https://www.infineon.com/cms/en/design-support/finder-selection-tools/product-finder/evaluation-board) page
-Libraries on GitHub  | [mtb-pdl-cat1](https://github.com/Infineon/mtb-pdl-cat1) – PSoC&trade; 6 peripheral driver library (PDL)  <br /> [mtb-hal-cat1](https://github.com/Infineon/mtb-hal-cat1) – Hardware abstraction layer (HAL) library <br /> [retarget-io](https://github.com/Infineon/retarget-io) – Utility library to retarget STDIO messages to a UART port <br />  
+Libraries on GitHub  | [mtb-pdl-cat1](https://github.com/Infineon/mtb-pdl-cat1) – PSoC&trade; 6 peripheral driver library (PDL)  <br /> [mtb-hal-cat1](https://github.com/Infineon/mtb-hal-cat1) – Hardware abstraction layer (HAL) library <br /> [retarget-io](https://github.com/Infineon/retarget-io) – Utility library to retarget STDIO messages to a UART port <br />
 Middleware on GitHub  | [MCUboot](https://github.com/mcu-tools/mcuboot) – Open-source library enabling the development of secure bootloader applications for 32-bit MCUs<br />[capsense](https://github.com/Infineon/capsense) – CAPSENSE&trade; library and documents <br /> [psoc6-middleware](https://github.com/Infineon/modustoolbox-software#psoc-6-middleware-libraries) – Links to all PSoC&trade; 6 MCU middleware
 Tools  | [Eclipse IDE for ModusToolbox&trade; software](https://www.infineon.com/modustoolbox) – ModusToolbox&trade; software is a collection of easy-to-use software and tools enabling rapid development with Infineon MCUs, covering applications from embedded sense and control to wireless and cloud-connected systems using AIROC&trade; Wi-Fi and Bluetooth® connectivity devices. <br /> [PSoC&trade; Creator](https://www.infineon.com/cms/en/design-support/tools/sdk/psoc-software/psoc-creator) – IDE for PSoC&trade; and FM0+ MCU development
 <br />
@@ -597,6 +579,7 @@ Document title: *CCE236897* - *MCUboot based Basic Bootloader for PSoC 61*
  Version | Description of change
  ------- | ---------------------
  1.0.0   | New code example
+ 1.0.1   | Custom BSP for PSoC61: Updates on README
 <br>
 
 ---------------------------------------------------------
