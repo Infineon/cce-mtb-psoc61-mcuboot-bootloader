@@ -124,6 +124,13 @@ For a list of supported IDEs and more details, see the "Exporting to IDEs" secti
 
 Now this example project has been created for *CY8CKIT-062S2-43012* KIT with PSoC62. Customize the BSP for *PSoC61* as below.
 
+> **Notes:** While creating/building the project if the following warnings are shown, ignore these warnings. The project will be created/built successfully.
+   ```
+   warning: ignoring old recipe for target
+   warning: overriding recipe for target
+   ```
+
+
 ## Custom BSP for PSoC61
 Following section describes how to customize the BSP for PSoC61 in the context of this code example. Please refer to [BSP Assistant User Guide](https://www.infineon.com/dgdl/Infineon-ModusToolbox_BSP_Assistant_1.0_User_Guide-UserManual-v02_00-EN.pdf?fileId=8ac78c8c8386267f0183a972f45c59af) for detailed instructions.
 
@@ -580,6 +587,7 @@ Document title: *CCE236897* - *MCUboot based Basic Bootloader for PSoC 61*
  ------- | ---------------------
  1.0.0   | New code example
  1.0.1   | Custom BSP for PSoC61: Updates on README
+ 1.0.2   | Minor README Updates
 <br>
 
 ---------------------------------------------------------
