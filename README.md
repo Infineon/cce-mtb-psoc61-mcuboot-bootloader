@@ -229,7 +229,7 @@ This example bundles two applications - the bootloader and the blinky app run by
 
    <summary><b>Using CLI</b></summary>
 
-      From the terminal, navigate to _< application >/blinky_ directory and execute the `make program_proj` command to build and program the application using the default toolchain to the default target.
+      From the terminal, navigate to _< application >/blinky_app_ directory and execute the `make program_proj` command to build and program the application using the default toolchain to the default target.
 
       ```
       make program_proj TOOLCHAIN=<toolchain>
@@ -270,7 +270,7 @@ This example bundles two applications - the bootloader and the blinky app run by
 
       <details open><summary><b>Using CLI</b></summary>
 
-      From the terminal, navigate to _< application >/blinky_ directory and execute the following command to program the UPGRADE image using the default toolchain to the default target:
+      From the terminal, navigate to _< application >/blinky_app_ directory and execute the following command to program the UPGRADE image using the default toolchain to the default target:
 
       ```
       make program_proj -j8 IMG_TYPE=UPGRADE
@@ -282,7 +282,7 @@ This example bundles two applications - the bootloader and the blinky app run by
 
       1. Launch **Cypress Programmer** and select the probe or kit that you are using.
 
-      2. Click on the **Open** icon and select the UPGRADE image hex file from *blinky/build/UPGRADE/\< BSP-NAME >/\<Build Config>* directory.
+      2. Click on the **Open** icon and select the UPGRADE image hex file from *blinky_app/build/UPGRADE/\< BSP-NAME >/\<Build Config>* directory.
 
       3. If your UPGRADE image is built for an external flash, select and mark the **External Memory** checkbox.
 
@@ -297,7 +297,7 @@ This example bundles two applications - the bootloader and the blinky app run by
     ![](images/booting-with-blinky-in-upgrade-mode.png)
 
 
-**Note:** The user can build the combined image for bootloader and blinky using the `make build` CLI command in _< application >_ directory but during the linking stage there might be an error stating multiple definition of symbols for blinky for `BOOT` and `UPGRADE` image. Currently the solution to the problem has been addressed in the following code section of the _< application >/blinky/Makefile_ which ignores the build artifacts of the other `IMG_TYPE`. Ex: If `BOOT` is selected as `IMG_TYPE` then _< application >/blinky/build/UPGRADE/_ build directory artifacts will be ignored during the compilation and linking of `BOOT` image.
+**Note:** The user can build the combined image for bootloader and blinky using the `make build` CLI command in _< application >_ directory but during the linking stage there might be an error stating multiple definition of symbols for blinky for `BOOT` and `UPGRADE` image. Currently the solution to the problem has been addressed in the following code section of the _< application >/blinky_app/Makefile_ which ignores the build artifacts of the other `IMG_TYPE`. Ex: If `BOOT` is selected as `IMG_TYPE` then _< application >/blinky/build/UPGRADE/_ build directory artifacts will be ignored during the compilation and linking of `BOOT` image.
 
 ```
 ifeq ($(IMG_TYPE), BOOT)
@@ -357,26 +357,27 @@ See [MCUboot design](https://github.com/mcu-tools/mcuboot/blob/v1.8.1-cypress/do
 
 #### **Customizing and selecting the flash map**
 
-A flash map for example is selected by changing the value of the `FLASH_MAP` variable in the *bootloader/shared_config.mk* file to the desired JSON file name. Supporting only *psoc6_swap_single.json* and *psoc6_overwrite_single.json* JSON files.
+A flash map for example is selected by changing the value of the `FLASH_MAP` variable in the *<*application*>/user_config.mk* file to the desired JSON file name. Supporting only *psoc6_swap_single.json* and *psoc6_overwrite_single.json* JSON files.
 
 See [How to modify flash map](https://github.com/mcu-tools/mcuboot/blob/v1.8.1-cypress/boot/cypress/MCUBootApp/MCUBootApp.md#how-to-modify-flash-map) section to understand how to customize the flash map to your needs.
 
-Before the pre-build stage, the flashmap JSON file is automatically parsed by the *bootloader/scripts/flashmap.py* python script to generate the following files:
+Before the pre-build stage, the flashmap JSON file is automatically parsed by the *<*application*>/scripts/memorymap_<*family*>.py* python script to generate the following files:
 
-   1. *flashmap.mk* and *source/cy_flash_map.h* files in the bootloader example.
-   2. *flashmap.mk* file in the blinky example.
+   1. *memorymap.mk*, *memorymap.c* and *memorymap.h* files in the bootloader example.
+   2. *memorymap.mk*, *memorymap.c* and *memorymap.h* files in the blinky example.
 
-The parameters generated in the *flashmap.mk* file are used in the `DEFINES` and `LDFLAGS` variables of the application Makefile.
+The parameters generated in the *memorymap.mk* file are used in the `DEFINES` and `LDFLAGS` variables of the application Makefile.
 
-The structures generated in the *cy_flash_map.h* file are used by the *cy_flashmap.c* file in the MCUboot library.
+The structures generated in the *memorymap.c* and *memorymap.h* files are used by the *cy_flashmap.c* file in the MCUboot library.
 
+> **Note:** While modifying the flash map, make sure the primary slot, secondary slot, and bootloader application flash sizes are appropriate. In this code example, it will automatically match the application linker scripts flash memory allocation with the *memorymap.c* and *user_config.mk* files.
 ### Configuring make variables
 
 This section explains the important make variables that affect the MCUboot functionality. Some of these variables are autogenerated from the flashmap JSON file and some variables can be updated directly in the Makefile or passed along with the `make build` command.
 
 #### **Common make variables**
 
-These variables are common to both the bootloader and blinky apps and are configured via the *bootloader/shared_config.mk* file.
+These variables are common to both the bootloader and blinky apps and are configured via the *<*application*>/user_config.mk* file.
 
  Variable | Default value | Description
  -------- | ------------- |------------
@@ -402,7 +403,7 @@ PSoC&trade; 6 MCU supports up to 240 external interrupts in addition to the 16 s
 
 #### **Bootloader app make variables**
 
-These variables are configured via *bootloader/Makefile*.
+These variables are configured via *bootloader_app/Makefile*.
 
  Variable             | Default value | Description
  -------------------- | ------------- | ----------------
@@ -414,7 +415,7 @@ These variables are configured via *bootloader/Makefile*.
 
 #### **Blinky app make variables**
 
-These variables are configured via *blinky/Makefile*.
+These variables are configured via *blinky_app/Makefile*.
 
  Variable       | Default value    | Description
  -------------- | -----------------| -------------
@@ -423,7 +424,7 @@ These variables are configured via *blinky/Makefile*.
  `USE_OVERWRITE`              | Autogenerated       | Value is 1 when scratch and status partitions are not defined in the flashmap JSON file.
  `USE_EXTERNAL_FLASH`         | Autogenerated       | Value is 1 when an external flash is used for either primary or secondary slot.
  `USE_XIP`                    | Autogenerated       | Value is 1 when the primary image is placed on external memory.
- `KEY_FILE_PATH` | *../bootloader/keys* | Path to the private key file. Used with the *imgtool* for signing the image.
+ `KEY_FILE_PATH` | *../<*application*>/keys* | Path to the private key file. Used with the *imgtool* for signing the image.
  `APP_VERSION_MAJOR`<br>`APP_VERSION_MINOR`<br>`APP_VERSION_BUILD` | 1.0.0 if `IMG_TYPE=BOOT`<br>2.0.0 if `IMG_TYPE=UPGRADE` | Passed to the *imgtool* with the `-v` option in *MAJOR.MINOR.BUILD* format, while signing the image. Also available as macros to the application with the same names.
 
 <br />
@@ -479,7 +480,7 @@ This example enables image authentication by uncommenting the following lines in
 
 When these options are enabled, the public key is embedded within the bootloader app. The blinky app is signed using the private key during the post-build steps. The *imgtool*  Python module included in the MCUboot repository is used for signing the image.
 
-This example includes a sample key pair under the *bootloader/keys* directory. **You must not use this key pair in your end product.** See [Generating a key pair](#generating-a-key-pair) for generating a new key pair.
+This example includes a sample key pair under the *<*application*>/keys* directory. **You must not use this key pair in your end product.** See [Generating a key pair](#generating-a-key-pair) for generating a new key pair.
 
 
 #### Generating a key pair
@@ -502,7 +503,7 @@ You can use the *imgtool* Python module to generate the keys.
 
 #### **Bootloader app: Pre-build steps**
 
-The pre-build steps are specified through the `PREBUILD` variable in *bootloader/Makefile*.
+The pre-build steps are specified through the `PREBUILD` variable in *bootloader_app/Makefile*.
 
 1. *Initialize the Git submodules for MCUboot:* This is required because the _library manager updates_ currently does not support initializing Git submodules while cloning a repo. This step executes only if the *libs/mcuboot/ext/mbedtls* directory (a submodule) does not exist or if the content of the directory is empty.
 
@@ -512,7 +513,7 @@ The pre-build steps are specified through the `PREBUILD` variable in *bootloader
 
 #### **Blinky app: Post-build steps**
 
-The post-build steps are specified through the `POSTBUILD` variable in *blinky/Makefile*. These steps generate the signed version of the image in HEX format using the *imgtool* Python module. The `SIGN_ARGS` variable holds the arguments passed to the *imgtool*. The final image is in HEX format so that PSoC&trade; 6 MCU programmer tools can directly program the image into the device. If you are generating the image to use with a firmware update application running on the device, you may need to convert the image into binary (BIN) format.
+The post-build steps are specified through the `POSTBUILD` variable in *blinky_app/Makefile*. These steps generate the signed version of the image in HEX format using the *imgtool* Python module. The `SIGN_ARGS` variable holds the arguments passed to the *imgtool*. The final image is in HEX format so that PSoC&trade; 6 MCU programmer tools can directly program the image into the device. If you are generating the image to use with a firmware update application running on the device, you may need to convert the image into binary (BIN) format.
 
 1. Make a copy of the *\*.hex* file into a *\*_raw.hex* file.
 
@@ -588,6 +589,8 @@ Document title: *CCE236897* - *MCUboot based Basic Bootloader for PSoC 61*
  1.0.0   | New code example
  1.0.1   | Custom BSP for PSoC61: Updates on README
  1.0.2   | Minor README Updates
+ 1.0.3   | Changes in deps folder
+ 2.0.0   | Included support for mcubootv1.9.1
 <br>
 
 ---------------------------------------------------------
