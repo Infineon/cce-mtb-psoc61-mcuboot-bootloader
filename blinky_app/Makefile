@@ -7,7 +7,20 @@
 #
 ################################################################################
 # \copyright
-# $ Copyright 2020-YEAR Cypress Semiconductor Apache2 $
+# Copyright 2020-2024, Cypress Semiconductor Corporation (an Infineon company)
+# SPDX-License-Identifier: Apache-2.0
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 ################################################################################
 
 # Include the user configuration make file
@@ -32,19 +45,23 @@ VERBOSE=
 # MCUboot Specific Configuration
 ###############################################################################
 
-.PHONY: generate_flashmap_blinky_app
-
 # Python command to generate flashmap header file from flashmap JSON file
 PLATFORM=PSOC_061_512K
 ifneq ($(FLASH_MAP), )
-generate_flashmap_blinky_app:
+.PHONY: FORCE
+memorymap.mk: FORCE
 	@echo -e "\n============================================================="
 	@echo -e "= Generating memorymap.h, memorymap.c and memorymap.mk ="
 	@echo -e "============================================================="
-	$(CY_PYTHON_PATH) ../scripts/memorymap_psoc6.py -p $(PLATFORM) -m -i ../flashmap/$(FLASH_MAP) -o ./source/memorymap.c -a ./source/memorymap.h -d $(IMG_ID) > ./memorymap.mk
+	$(if $(SEARCH_core-make),$(CY_PYTHON_PATH),true) ../scripts/memorymap_psoc6.py -p $(PLATFORM) -m -i ../flashmap/$(FLASH_MAP) -o ./source/memorymap.c -a ./source/memorymap.h -d $(IMG_ID) > ./memorymap.mk.tmp
+	@if ! cmp -s "memorymap.mk.tmp" "memorymap.mk"; then \
+		mv -f "memorymap.mk.tmp" "memorymap.mk"; \
+	else \
+		rm -f "memorymap.mk.tmp"; \
+	fi
 	@echo -e "=============================================================\n"
 
--include ./memorymap.mk
+-include memorymap.mk
 DEFINES+=CY_FLASH_MAP_JSON
 endif
 
@@ -59,7 +76,7 @@ endif
 
 # 1. Define the image type.
 # 2. Ignore the build directory(if any) of other build mode to avoid linker error.
-# 3. Disabling the encrpyt image support while signing the boot image
+# 3. Disabling the encrypt image support while signing the boot image
 # 4. Add flag, if not using swap for upgrade
 ifeq ($(IMG_TYPE), BOOT)
 DEFINES+=BOOT_IMAGE
@@ -246,13 +263,8 @@ HEX_START_ADDR?=$(SECONDARY_IMG_START)
 endif
 
 # Custom pre-build commands to run.
-PREBUILD_VAR=+\
-rm -f ./source/memorymap.c;\
-rm -f ./source/memorymap.h;\
-rm -f ./memorymap.mk;\
-$(MAKE) generate_flashmap_blinky_app;
 
-PREBUILD=$(PREBUILD_VAR)
+PREBUILD=
 
 # Custom post-build commands to run.
 # 1. Take a backup of the original hex file (_raw.hex)
